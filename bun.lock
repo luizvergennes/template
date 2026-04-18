@@ -3,13 +3,14 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "next-monorepo",
+      "name": "next-template",
       "devDependencies": {
         "@biomejs/biome": "^2.4.12",
+        "@types/bun": "catalog:",
         "@workspace/typescript-config": "workspace:*",
         "husky": "^9.1.7",
         "turbo": "^2.8.17",
-        "typescript": "^5",
+        "typescript": "catalog:",
         "ultracite": "^7.6.0",
       },
     },
@@ -33,23 +34,11 @@
         "typescript": "catalog:",
       },
     },
-    "packages/api": {
-      "name": "@workspace/api",
-      "version": "0.0.0",
-      "dependencies": {
-        "@workspace/db": "workspace:*",
-        "zod": "catalog:",
-      },
-      "devDependencies": {
-        "@types/bun": "catalog:",
-        "@workspace/typescript-config": "workspace:*",
-        "typescript": "catalog:",
-      },
-    },
     "packages/db": {
       "name": "@workspace/db",
       "version": "0.0.0",
       "dependencies": {
+        "@workspace/env": "workspace:*",
         "drizzle-orm": "^0.45.1",
         "zod": "catalog:",
       },
@@ -58,6 +47,18 @@
         "@types/pg": "^8.16.0",
         "@workspace/typescript-config": "workspace:*",
         "drizzle-kit": "^0.31.8",
+        "typescript": "catalog:",
+      },
+    },
+    "packages/env": {
+      "name": "@workspace/env",
+      "version": "0.0.0",
+      "dependencies": {
+        "zod": "catalog:",
+      },
+      "devDependencies": {
+        "@types/bun": "catalog:",
+        "@workspace/typescript-config": "workspace:*",
         "typescript": "catalog:",
       },
     },
@@ -95,7 +96,7 @@
   },
   "catalog": {
     "@types/bun": "^1.3.10",
-    "typescript": "^5",
+    "typescript": "^6",
     "zod": "^4.1.13",
   },
   "packages": {
@@ -575,9 +576,9 @@
 
     "@types/validate-npm-package-name": ["@types/validate-npm-package-name@4.0.2", "", {}, "sha512-lrpDziQipxCEeK5kWxvljWYhUvOiB2A9izZd9B2AFarYAkqZshb4lPbRs7zKEic6eGtH8V/2qJW+dPp9OtF6bw=="],
 
-    "@workspace/api": ["@workspace/api@workspace:packages/api"],
-
     "@workspace/db": ["@workspace/db@workspace:packages/db"],
+
+    "@workspace/env": ["@workspace/env@workspace:packages/env"],
 
     "@workspace/typescript-config": ["@workspace/typescript-config@workspace:packages/typescript-config"],
 
@@ -1191,7 +1192,7 @@
 
     "type-is": ["type-is@2.0.1", "", { "dependencies": { "content-type": "^1.0.5", "media-typer": "^1.1.0", "mime-types": "^3.0.0" } }, "sha512-OZs6gsjF4vMp32qrCbiVSkrFmXtG/AZhY3t0iAMrMBiAZyV9oALtXO8hsrHbMXF9x6L3grlFuwW2oAz7cav+Gw=="],
 
-    "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+    "typescript": ["typescript@6.0.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw=="],
 
     "ultracite": ["ultracite@7.6.0", "", { "dependencies": { "@clack/prompts": "^1.2.0", "commander": "^14.0.3", "cross-spawn": "^7.0.6", "deepmerge": "^4.3.1", "glob": "^13.0.6", "jsonc-parser": "^3.3.1", "nypm": "^0.6.5", "yaml": "^2.8.3", "zod": "^4.3.6" }, "peerDependencies": { "oxfmt": ">=0.1.0", "oxlint": "^1.0.0" }, "optionalPeers": ["oxfmt", "oxlint"], "bin": { "ultracite": "dist/index.js" } }, "sha512-i8Pmi7Tgtku00/4od12nLiLjgO92+DmuRWTIFApe4f6n8osYT98QLcEdsf7xpJiZflyc8gsONWbFw0RvhO9QzQ=="],
 
@@ -1262,8 +1263,6 @@
     "@dotenvx/dotenvx/which": ["which@4.0.0", "", { "dependencies": { "isexe": "^3.1.1" }, "bin": { "node-which": "bin/which.js" } }, "sha512-GlaYyEb07DPxYCKhKzplCWBJtvxZcZMrL+4UkrTSJHHPyZU4mYYTv3qaOe77H7EODLSSopAUFAc6W8U4yqvscg=="],
 
     "@esbuild-kit/core-utils/esbuild": ["esbuild@0.18.20", "", { "optionalDependencies": { "@esbuild/android-arm": "0.18.20", "@esbuild/android-arm64": "0.18.20", "@esbuild/android-x64": "0.18.20", "@esbuild/darwin-arm64": "0.18.20", "@esbuild/darwin-x64": "0.18.20", "@esbuild/freebsd-arm64": "0.18.20", "@esbuild/freebsd-x64": "0.18.20", "@esbuild/linux-arm": "0.18.20", "@esbuild/linux-arm64": "0.18.20", "@esbuild/linux-ia32": "0.18.20", "@esbuild/linux-loong64": "0.18.20", "@esbuild/linux-mips64el": "0.18.20", "@esbuild/linux-ppc64": "0.18.20", "@esbuild/linux-riscv64": "0.18.20", "@esbuild/linux-s390x": "0.18.20", "@esbuild/linux-x64": "0.18.20", "@esbuild/netbsd-x64": "0.18.20", "@esbuild/openbsd-x64": "0.18.20", "@esbuild/sunos-x64": "0.18.20", "@esbuild/win32-arm64": "0.18.20", "@esbuild/win32-ia32": "0.18.20", "@esbuild/win32-x64": "0.18.20" }, "bin": { "esbuild": "bin/esbuild" } }, "sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA=="],
-
-    "@modelcontextprotocol/sdk/zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
 
     "@mswjs/interceptors/@open-draft/deferred-promise": ["@open-draft/deferred-promise@2.2.0", "", {}, "sha512-CecwLWx3rhxVQF6V4bAgPS5t+So2sTbPgAzafKkVizyi7tlwpcFpdFqq+wqF2OwNBmqFuu6tOyouTuxgpMfzmA=="],
 

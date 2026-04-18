@@ -12,6 +12,10 @@
     "moduleResolution": "Bundler",
     "allowJs": true,
     "jsx": "preserve",
+    "types": [
+      "bun",
+      "react"
+    ],
     "noEmit": true
   }
 }

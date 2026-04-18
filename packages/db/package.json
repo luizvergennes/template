@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.45.1",
+    "@workspace/env": "workspace:*",
     "zod": "catalog:"
   },
   "devDependencies": {
