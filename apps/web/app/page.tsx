@@ -1,6 +1,6 @@
 import { Button } from "@workspace/ui/components/button";
 
-export default async function Page() {
+export default function Page() {
 	return (
 		<div className="flex min-h-svh p-6">
 			<div className="flex min-w-0 max-w-md flex-col gap-4 text-sm leading-loose">
