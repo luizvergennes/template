@@ -1,22 +1,29 @@
-import { db } from "@workspace/db";
+import { healthCheck } from "@workspace/db/utils";
 import { connection } from "next/server";
 import { version } from "@/lib/version";
 
 export async function GET(_request: Request) {
 	await connection();
 	try {
-		await db.$client.connect();
+		await healthCheck();
 		return Response.json(
 			{ status: "healthy", version },
 			{
 				status: 200,
+				headers: {
+					"Cache-Control": "no-cache",
+				},
 			}
 		);
-	} catch {
+	} catch (e: unknown) {
+		const message = e instanceof Error ? e.message : "Unknown Error";
 		return Response.json(
-			{ status: "unhealthy", message: "Database connection failed" },
+			{ status: "unhealthy", message },
 			{
 				status: 503,
+				headers: {
+					"Cache-Control": "no-cache",
+				},
 			}
 		);
 	}

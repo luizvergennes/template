@@ -8,6 +8,7 @@ node_modules
 # Local env files
 .env
 .env*.local
+.secrets/nextjs-actions-key
 
 # Testing
 coverage
