@@ -1,7 +1,7 @@
 import { env } from "@workspace/env/web";
 import { drizzle } from "drizzle-orm/bun-sql";
 // biome-ignore lint/performance/noNamespaceImport: Schemas
-import * as schema from "./schema/index.js";
+import * as schema from "./schema";
 
 export function createDb() {
 	return drizzle(env.DATABASE_URL, { schema });

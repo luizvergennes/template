@@ -1,4 +1,4 @@
-import "@mock-better-t/env/web";
+import "@workspace/env/web";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

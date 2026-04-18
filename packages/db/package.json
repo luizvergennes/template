@@ -25,8 +25,9 @@
     "db:down": "docker compose down"
   },
   "dependencies": {
-    "drizzle-orm": "^0.45.1",
     "@workspace/env": "workspace:*",
+    "drizzle-orm": "^0.45.1",
+    "pg": "^8.20.0",
     "zod": "catalog:"
   },
   "devDependencies": {

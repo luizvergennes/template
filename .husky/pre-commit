@@ -2,5 +2,5 @@ bun test --pass-with-no-tests
 
 # ultracite
 #!/bin/sh
-bun x check --write --staged --no-errors-on-unmatched --files-ignore-unknown=true
+bun x biome check --write --staged --no-errors-on-unmatched --files-ignore-unknown=true
 git update-index --again

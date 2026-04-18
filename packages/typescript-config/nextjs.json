@@ -9,13 +9,18 @@
       }
     ],
     "module": "ESNext",
+    "target": "ES2017",
     "moduleResolution": "Bundler",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "allowJs": true,
+    "incremental": true,
     "jsx": "preserve",
-    "types": [
-      "bun",
-      "react"
-    ],
-    "noEmit": true
+    "types": ["bun", "react"],
+    "noEmit": true,
+    "esModuleInterop": true,
+    "strict": true
   }
 }
