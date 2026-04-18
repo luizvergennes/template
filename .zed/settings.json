@@ -1,0 +1,100 @@
+{
+  "project_name": "Next.js Template",
+  "format_on_save": "on",
+  "formatter": "language_server",
+  "lsp": {
+    "typescript-language-server": {
+      "settings": {
+        "typescript": {
+          "preferences": {
+            "includePackageJsonAutoImports": "on"
+          }
+        }
+      }
+    }
+  },
+  "languages": {
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    }
+  },
+  "context_servers": {
+    "better-t-stack": {
+      "enabled": true,
+      "command": "bunx",
+      "args": [
+        "create-better-t-stack@latest",
+        "mcp"
+      ],
+      "env": {}
+    },
+    "context7": {
+      "enabled": true,
+      "command": "bunx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {}
+    },
+    "shadcn": {
+      "enabled": true,
+      "command": "bunx",
+      "args": [
+        "-y",
+        "shadcn@latest",
+        "mcp"
+      ],
+      "env": {}
+    },
+    "next-devtools": {
+      "enabled": true,
+      "command": "bunx",
+      "args": [
+        "-y",
+        "next-devtools-mcp@latest"
+      ],
+      "env": {}
+    },
+    "better-auth": {
+      "enabled": true,
+      "url": "https://mcp.inkeep.com/better-auth/mcp",
+      "headers": {}
+    },
+    "polar": {
+      "enabled": true,
+      "url": "https://mcp.polar.sh/mcp/polar-mcp",
+      "headers": {}
+    }
+  }
+}

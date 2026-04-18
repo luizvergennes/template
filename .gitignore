@@ -7,16 +7,15 @@ node_modules
 
 # Local env files
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*.local
 
 # Testing
 coverage
+.nyc_output
 
 # Turbo
 .turbo
+.nx
 
 # Vercel
 .vercel
@@ -26,7 +25,16 @@ coverage
 out/
 build
 dist
+*.tsbuildinfo
 
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
 
 # Debug
 npm-debug.log*
@@ -34,3 +42,7 @@ npm-debug.log*
 # Misc
 .DS_Store
 *.pem
+*.tgz
+.cache
+tmp
+temp
