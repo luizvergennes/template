@@ -3,6 +3,10 @@ import { z } from "zod/mini";
 const webEnvSchema = z.object({
 	NODE_ENV: z.enum(["development", "production", "test"]),
 	DATABASE_URL: z.string(),
+	BETTER_AUTH_SECRET: z.string(),
+	BETTER_AUTH_URL: z.string(),
+	PROJECT_NAME: z.string(),
+	npm_package_version: z.string(),
 });
 
 const createEnv = (env: NodeJS.ProcessEnv) => {
