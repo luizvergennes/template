@@ -79,7 +79,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=sha,format=short
-            type=ref,event=branch${{ env.REGISTRY }}/${{ env.PROJECT_NAME }}/${{ matrix.app }}
+            type=ref,event=branch
             type=ref,event=pr
 
       - name: Set up QEMU
@@ -97,6 +97,8 @@ jobs:
           push: true
           build-args: |
             APP_VERSION=${{ matrix.version }}
+          secrets: |
+            next_actions_key=${{ secrets.NEXT_ACTIONS_KEY }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
