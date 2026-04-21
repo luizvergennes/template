@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -45,11 +45,7 @@
           "level": "warn",
           "fix": "safe",
           "options": {
-            "functions": [
-              "clsx",
-              "cva",
-              "cn"
-            ]
+            "functions": ["clsx", "cva", "cn"]
           }
         }
       },
@@ -85,8 +81,5 @@
       }
     }
   },
-  "extends": [
-    "ultracite/biome/core",
-    "ultracite/biome/next"
-  ]
+  "extends": ["ultracite/biome/core", "ultracite/biome/next"]
 }
