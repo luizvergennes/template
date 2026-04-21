@@ -91,9 +91,9 @@
       "url": "https://mcp.inkeep.com/better-auth/mcp",
       "headers": {}
     },
-    "polar": {
+    "bun": {
       "enabled": true,
-      "url": "https://mcp.polar.sh/mcp/polar-mcp",
+      "url": "https://bun.com/docs/mcp",
       "headers": {}
     }
   }
