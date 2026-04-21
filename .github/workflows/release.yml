@@ -1,0 +1,110 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/*/package.json"
+
+env:
+  REGISTRY: docker.lgvm.dev
+  PROJECT_NAME: next-template
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+      any: ${{ steps.build-matrix.outputs.any }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Diff apps/*/package.json version field
+        id: build-matrix
+        run: |
+          CHANGED='[]'
+          for pkg in apps/*/package.json; do
+            APP=$(basename "$(dirname "$pkg")")
+            BEFORE=$(git show HEAD~1:"$pkg" 2>/dev/null | jq -r .version 2>/dev/null || echo "")
+            AFTER=$(jq -r .version "$pkg")
+            if [[ -n "$AFTER" && "$BEFORE" != "$AFTER" ]]; then
+              CHANGED=$(jq -c --arg app "$APP" --arg v "$AFTER" '. += [{app:$app, version:$v}]' <<<"$CHANGED")
+            fi
+          done
+          {
+            echo "matrix={\"include\":$CHANGED}"
+            echo "any=$(jq 'length > 0' <<<"$CHANGED")"
+          } >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: detect
+    if: needs.detect.outputs.any == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.detect.outputs.matrix) }}
+      fail-fast: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to private registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+
+      - name: Skip if this version was already published
+        id: check
+        run: |
+          if docker manifest inspect ${{ env.REGISTRY }}/${{ env.PROJECT_NAME }}/${{ matrix.app }}:${{ matrix.version }} >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.REGISTRY }}/${{ env.PROJECT_NAME }}/${{ matrix.app }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha,format=short
+            type=ref,event=branch${{ env.REGISTRY }}/${{ env.PROJECT_NAME }}/${{ matrix.app }}
+            type=ref,event=pr
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3.6.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build & push
+        if: steps.check.outputs.exists == 'false'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/${{ matrix.app }}/Dockerfile
+          push: true
+          build-args: |
+            APP_VERSION=${{ matrix.version }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Tag the release
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          TAG="${{ matrix.app }}-v${{ matrix.version }}"
+          git tag "$TAG"
+          git push origin "$TAG"
