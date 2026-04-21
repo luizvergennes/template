@@ -3,10 +3,7 @@
   "display": "React Library",
   "extends": "./base.json",
   "compilerOptions": {
-    "types": [
-      "bun",
-      "react"
-    ],
+    "types": ["bun", "react"],
     "jsx": "react-jsx"
   }
 }
