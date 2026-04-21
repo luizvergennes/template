@@ -2,32 +2,19 @@
   "mcpServers": {
     "better-t-stack": {
       "command": "bunx",
-      "args": [
-        "create-better-t-stack@latest",
-        "mcp"
-      ]
+      "args": ["create-better-t-stack@latest", "mcp"]
     },
     "context7": {
       "command": "bunx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ]
+      "args": ["-y", "@upstash/context7-mcp"]
     },
     "shadcn": {
       "command": "bunx",
-      "args": [
-        "-y",
-        "shadcn@latest",
-        "mcp"
-      ]
+      "args": ["-y", "shadcn@latest", "mcp"]
     },
     "next-devtools": {
       "command": "bunx",
-      "args": [
-        "-y",
-        "next-devtools-mcp@latest"
-      ]
+      "args": ["-y", "next-devtools-mcp@latest"]
     },
     "better-auth": {
       "type": "http",

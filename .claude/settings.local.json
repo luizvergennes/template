@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": ["Bash(*)", "WebFetch", "WebSearch", "Read(*)"],
+    "deny": [
+      "Bash(rm *)",
+      "Bash(del *)",
+      "Bash(rmdir *)",
+      "Bash(rd *)",
+      "Bash(unlink *)",
+      "Bash(sudo *)",
+      "Bash(git push *)",
+      "Bash(git reset *)",
+      "Bash(git clean *)",
+      "Bash(git clean *)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "better-t-stack",
+    "context7",
+    "shadcn",
+    "next-devtools",
+    "better-auth"
+  ]
+}
