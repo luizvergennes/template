@@ -1,6 +1,6 @@
 {
   "name": "web",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "type": "module",
   "private": true,
   "scripts": {
@@ -9,7 +9,10 @@
     "start": "bun --bun next start",
     "lint": "biome lint",
     "format": "biome format --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "release:patch": "bun pm version patch --no-git-tag-version",
+    "release:minor": "bun pm version minor --no-git-tag-version",
+    "release:major": "bun pm version major --no-git-tag-version"
   },
   "dependencies": {
     "@remixicon/react": "^4.9.0",
